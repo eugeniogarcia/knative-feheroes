@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: heroes_passthrough
+    
+server:
+  port: 8085
+  servlet:
+    session:
+      cookie:
+        domain: .localhost:4200
+        http-only: true
+        path: /
