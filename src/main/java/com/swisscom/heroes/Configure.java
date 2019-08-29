@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.swisscom.heroes.filter.RequestContext;
 
@@ -15,6 +16,12 @@ public class Configure {
 
 	@Autowired
 	RequestContext context;
+
+	@Bean
+	@RequestScope
+	public RequestContext requestContext() {
+		return new RequestContext();
+	}
 
 	@Bean
 	public RestTemplate service() {
