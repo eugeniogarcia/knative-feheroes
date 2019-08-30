@@ -24,7 +24,7 @@ public class heroesController {
 	@Autowired
 	RestTemplate servicio;
 	//Eureka service name
-	private final String url="http://heroes";
+	private final String url="http://heroes-svc";
 
 	@RequestMapping(value = "/heroes",produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<Hero[]> getHeroes(){

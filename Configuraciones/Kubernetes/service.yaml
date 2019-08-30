@@ -2,15 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: feheroes-svc
-  namespace: default
+  namespace: heroes-ns
   annotations:
   labels:
     app: fe-heroes
 spec:
-  type: LoadBalancer                
+  type: NodePort                
   selector:
     app: fe-heroes
   ports:
   - name: http              
+    nodePort: 30150
     port: 80                
     targetPort: http          

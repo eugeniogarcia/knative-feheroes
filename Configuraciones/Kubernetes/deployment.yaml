@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: feheroes
+  namespace: heroes-ns
   labels:
     app: fe-heroes
 spec:
@@ -17,8 +18,21 @@ spec:
       containers:
       - name: feheroes
         image: www.gz.com:5000/fehello-jib:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
         ports:
         - name: http  
           containerPort: 8085
+        livenessProbe:
+          httpGet:
+            path: /heroes
+            port: 8085
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /heroes
+            port: 8085
+          initialDelaySeconds: 0
+          timeoutSeconds: 1          
       imagePullSecrets:
       - name: milocalregistry

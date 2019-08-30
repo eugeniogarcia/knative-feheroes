@@ -69,10 +69,12 @@
 						<ports>
 							<port>8082</port>
 						</ports>
+						<!-- 
 						<jvmFlags>
 							<jvmFlag>-Xms512m</jvmFlag>
 							<jvmFlag>-Xmx512m</jvmFlag>
 						</jvmFlags>
+						 -->
 					  </container>
 					  <allowInsecureRegistries>true</allowInsecureRegistries>
   				 </configuration>

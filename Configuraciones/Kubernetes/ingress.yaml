@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: heroes
+  namespace: heroes-ns
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: servicios.com
+    http:
+      paths:
+      - path: /misheroes(/|$)(.*)
+        backend:
+          serviceName: feheroes-svc
+          servicePort: 80
+# http://servicios.com/misheroes/heroes          
