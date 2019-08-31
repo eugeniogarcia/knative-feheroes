@@ -9,12 +9,23 @@ public class RequestContext {
 	private final boolean initialised=false;
 	private String cookie="";
 	private String csrf="";
+	private String usuario="";
+	private boolean fail=false;
 
 	public String getCookie() {
 		return cookie;
 	}
+
 	public String getCSRF() {
 		return csrf;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public boolean isFail() {
+		return fail;
 	}
 
 	public void init(final HttpServletRequest request, final HttpServletResponse response) {
@@ -28,6 +39,14 @@ public class RequestContext {
 		final String valorCabecera = request.getHeader(Header.CSRF.getHeaderName());
 		if (valorCabecera != null) {
 			this.csrf= valorCabecera ;
+		}
+		final String valorUsuario= request.getHeader(Header.USUARIO.getHeaderName());
+		if (valorUsuario!= null) {
+			this.usuario= valorUsuario;
+		}
+		final String valorFail= request.getHeader(Header.FAIL.getHeaderName());
+		if (valorFail!= null) {
+			this.fail= true;
 		}
 	}
 

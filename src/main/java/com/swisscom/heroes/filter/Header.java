@@ -3,7 +3,10 @@ package com.swisscom.heroes.filter;
 public enum Header {
 
 	COOKIE("Cookie"),
-	CSRF("X-XSRF-TOKEN");
+	CSRF("X-XSRF-TOKEN"),
+	USUARIO("x-usuario"),
+	FAIL("x-fail")
+	;
 
 	private final String headerName;
 

@@ -14,7 +14,7 @@ import com.swisscom.heroes.filter.Header;
 import com.swisscom.heroes.filter.RequestContext;
 
 public class RestInterceptor implements ClientHttpRequestInterceptor {
-	private static final Logger logger = LoggerFactory.getLogger(RestInterceptor.class);
+	private static final Logger LOGGER= LoggerFactory.getLogger(RestInterceptor.class);
 
 	private final RequestContext context;
 
@@ -28,13 +28,24 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			throws IOException {
 		final HttpHeaders headers = request.getHeaders();
 		if(!context.getCookie().isEmpty()) {
-			logger.info("Forwarding the cookie value "+context.getCookie());
+			LOGGER.info("Forwarding the cookie value {0}",context.getCookie());
 			headers.add(Header.COOKIE.getHeaderName(), context.getCookie());
 		}
+
 		if(!context.getCSRF().isEmpty()) {
-			logger.info("Forwarding the header value "+context.getCSRF());
+			LOGGER.info("Forwarding the header value {0}",context.getCSRF());
 			headers.add(Header.CSRF.getHeaderName(), context.getCSRF());
 		}
+
+		if(!context.getUsuario().isEmpty()) {
+			LOGGER.info("Forwarding the header value {0}",context.getUsuario());
+			headers.add(Header.USUARIO.getHeaderName(), context.getUsuario());
+		}
+		if(context.isFail()) {
+			LOGGER.info("Forwarding a failure");
+			headers.add(Header.FAIL.getHeaderName(), "");
+		}
+
 		return execution.execute(request, body);
 	}
 }

@@ -3,19 +3,19 @@ package com.swisscom.heroes;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.annotation.RequestScope;
 
+import com.swisscom.heroes.filter.HttpFiltro;
 import com.swisscom.heroes.filter.RequestContext;
 
 @Configuration
 public class Configure {
 
-	@Autowired
-	RequestContext context;
+	private static final int ORDER = 2;
 
 	@Bean
 	@RequestScope
@@ -24,7 +24,15 @@ public class Configure {
 	}
 
 	@Bean
-	public RestTemplate service() {
+	public FilterRegistrationBean<HttpFiltro> trackingFilterRegistrar(final RequestContext oceRequestContext) {
+		final FilterRegistrationBean<HttpFiltro> registration = new FilterRegistrationBean<>();
+		registration.setFilter(new HttpFiltro(oceRequestContext));
+		registration.setOrder(ORDER);
+		return registration;
+	}
+
+	@Bean
+	public RestTemplate service(RequestContext context) {
 		final RestTemplate template = new RestTemplate();
 
 		final List interceptors = template.getInterceptors();
