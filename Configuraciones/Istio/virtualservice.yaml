@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: feheroes-svc-vs
+spec:
+  hosts:
+  - feheroes-svc
+  gateways:
+  - feheroes-svc-gw
+  http:
+  - match:
+    - uri:
+        exact: /misheroes
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: feheroes-svc
+        port:
+          number: 80        
+  - route:
+    - destination:
+        host: feheroes-svc          
