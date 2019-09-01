@@ -4,7 +4,7 @@ metadata:
   name: feheroes-svc-vs
 spec:
   hosts:
-  - feheroes-svc
+  - "*"
   gateways:
   - feheroes-svc-gw
   http:
@@ -12,12 +12,14 @@ spec:
     - uri:
         exact: /misheroes
     rewrite:
-      uri: /
+      uri: /heroes
     route:
     - destination:
         host: feheroes-svc
         port:
-          number: 80        
+          number: 80
   - route:
     - destination:
-        host: feheroes-svc          
+        host: feheroes-svc
+# http://servicios.com:31380/heroes
+# http://servicios.com:31380/misheroes
