@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: heroes
+  namespace: heroes-ns
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: serviciosaz.com
+    http:
+      paths:
+      - path: /misheroes(/|$)(.*)
+        backend:
+          serviceName: feheroes-svc
+          servicePort: 80
+# http://serviciosaz.com/misheroes/heroes
+# La entrada en hosts para resolver la direccion de serviciosaz.com la podemos
+#encontrar mirando el servicio jittery-toucan-nginx-ingress-controller. Este servicio es de tipo LoadBalancer
+#y tiene asignada una IP Publica para el puerto 80, y otra IP publica para el puerto 443.
