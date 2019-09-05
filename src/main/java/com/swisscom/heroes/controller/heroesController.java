@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,9 @@ public class heroesController {
 
 	@Autowired
 	RestTemplate servicio;
-	//Eureka service name
-	private final String url="http://heroes-svc";
+
+	@Value("${svc:http://heroes-svc}")
+	private String url;
 
 	@RequestMapping(value = "/heroes",produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<Hero[]> getHeroes(){

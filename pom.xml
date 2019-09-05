@@ -58,11 +58,24 @@
 					  </from>
 
 					  <to>
-					    <!-- <image>docker.io/egsmartin/fehello-jib:${project.version}</image> -->
+					    <!-- 
+					    <image>docker.io/egsmartin/fehello-jib:${project.version}</image> 
+						<auth>
+					    	<username>egsmartin</username>
+					    	<password>Vera1511</password>
+					    </auth>
+					    -->
+					    <!-- 
 					    <image>www.gz.com:5000/fehello-jib:${project.version}</image>
 						<auth>
 					    	<username>egsmartin</username>
 					    	<password>Vera1511</password>
+					    </auth>
+					    -->
+					    <image>egsmcontenedor.azurecr.io/fehello-jib:${project.version}</image>
+						<auth>
+					    	<username>egsmContenedor</username>
+					    	<password>LNTuvGUKsCf9w5lMgJwYBjiMWJL/19Ea</password>
 					    </auth>
 					  </to>
 					  <container>
