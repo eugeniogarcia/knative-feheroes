@@ -46,10 +46,10 @@ public class RequestContext {
 
 		while (headerNames.hasMoreElements()) {
 			final String headerName = headerNames.nextElement();
-			headers.put(headerName , request.getHeader(headerName));
+			if(Header.isPropagated(headerName )) {
+				headers.put(headerName , request.getHeader(headerName));
+			}
 		}
-
 	}
-
 }
 
