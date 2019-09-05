@@ -1,6 +1,9 @@
 package com.swisscom.heroes;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +30,6 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
 			throws IOException {
 		final HttpHeaders headers = request.getHeaders();
-		if(!context.getCookie().isEmpty()) {
-			LOGGER.info("Forwarding the cookie value {0}",context.getCookie());
-			headers.add(Header.COOKIE.getHeaderName(), context.getCookie());
-		}
-
-		if(!context.getCSRF().isEmpty()) {
-			LOGGER.info("Forwarding the header value {0}",context.getCSRF());
-			headers.add(Header.CSRF.getHeaderName(), context.getCSRF());
-		}
 
 		if(!context.getUsuario().isEmpty()) {
 			LOGGER.info("Forwarding the header value {0}",context.getUsuario());
@@ -46,6 +40,13 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			headers.add(Header.FAIL.getHeaderName(), "");
 		}
 
+		//Copy all headers for Zipkin
+		final Set<Entry<String, String>> set = context.getHeaders().entrySet();
+		final Iterator<Entry<String, String>> iterator = set.iterator();
+		while(iterator.hasNext()) {
+			final Entry<String, String> mentry = iterator.next();
+			headers.add(mentry.getKey(), mentry.getValue());
+		}
 		return execution.execute(request, body);
 	}
 }
