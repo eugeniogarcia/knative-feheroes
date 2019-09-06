@@ -18,3 +18,4 @@ spec:
             imagePullPolicy: Always
             ports:
               - containerPort: 8085
+# http://feheroes-svc.heroes-kn-ns.example.com/heroes			  
