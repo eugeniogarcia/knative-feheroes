@@ -26,7 +26,7 @@ spec:
         image: www.gz.com:5000/fehello-jib:0.0.1-SNAPSHOT
         env:
         - name: svc
-          value: "http://heroes-svc.default"         
+          value: "http://heroes-svc"
         imagePullPolicy: Always
         ports:
         - name: http
