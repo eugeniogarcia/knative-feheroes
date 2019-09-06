@@ -64,6 +64,7 @@ public class RequestContext {
 			}
 		}
 	}
+
 	public void updateSpan(SpanCustomizer span) {
 		for (final Map.Entry<String, Object> entry : toMap(this).entrySet()) {
 			if (entry.getValue() != null) {
