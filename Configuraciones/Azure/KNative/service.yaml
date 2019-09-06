@@ -11,7 +11,10 @@ spec:
           serviceAccountName: build-bot
           container:
             name: feheroes
-            image: egsmcontenedor.azurecr.io/fehello-jib:0.0.1-SNAPSHOT
+            image: egsmcontenedor.azurecr.io/fehello-jib:0.0.2-SNAPSHOT
+            env:
+            - name: svc
+              value: "http://heroes-svc"
             imagePullPolicy: Always
             ports:
               - containerPort: 8085
