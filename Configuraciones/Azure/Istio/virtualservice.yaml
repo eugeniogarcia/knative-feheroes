@@ -18,9 +18,5 @@ spec:
         host: feheroes-svc
         port:
           number: 80
-  - route:
-    - destination:
-        host: feheroes-svc
 # http://104.40.176.161/misheroes
-# http://104.40.176.161/heroes
 # El ingress service de istio es de tipo LoadBalancer, y la IP publica que tiene asignada es 104.40.176.161
