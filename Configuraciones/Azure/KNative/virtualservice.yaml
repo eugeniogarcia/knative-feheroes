@@ -16,7 +16,7 @@ spec:
       uri: /heroes
     route:
     - destination:
-        host: feheroes-svc-qmrsv
+        host: feheroes-svc.heroes-kn-ns
         port:
           number: 80
 # http://104.40.176.161/kn/misheroes

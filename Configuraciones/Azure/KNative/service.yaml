@@ -14,7 +14,7 @@ spec:
             image: egsmcontenedor.azurecr.io/fehello-jib:0.0.2-SNAPSHOT
             env:
             - name: svc
-              value: "http://heroes-svc"
+              value: "http://heroes-svc.heroes-kn-ns"
             imagePullPolicy: Always
             ports:
               - containerPort: 8085
