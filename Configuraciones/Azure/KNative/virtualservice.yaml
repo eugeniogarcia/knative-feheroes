@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: feheroes-svc-vs
+  namespace: heroes-kn-ns
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - feheroes-svc-gw
+  http:
+  - match:
+    - uri:
+        exact: /kn/misheroes
+    rewrite:
+      uri: /heroes
+    route:
+    - destination:
+        host: feheroes-svc.heroes-kn-ns
+        port:
+          number: 80
+# http://104.40.176.161/kn/misheroes
+# El ingress service de istio es de tipo LoadBalancer, y la IP publica que tiene asignada es 104.40.176.161
