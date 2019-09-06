@@ -46,8 +46,12 @@ public class RequestContext {
 
 		while (headerNames.hasMoreElements()) {
 			final String headerName = headerNames.nextElement();
-			if(Header.isPropagated(headerName )) {
-				headers.put(headerName , request.getHeader(headerName));
+			if(Header.isPropagated(headerName)) {
+				//Propate x-b3-parentspanid only when it has a value
+				if(headerName.compareTo(Header.x_b3_parentspanid.getHeaderName())!=0 ||
+						!request.getHeader(headerName).isEmpty()) {
+					headers.put(headerName , request.getHeader(headerName));
+				}
 			}
 		}
 	}
