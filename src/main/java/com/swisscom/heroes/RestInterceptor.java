@@ -1,6 +1,9 @@
 package com.swisscom.heroes;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +40,6 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			headers.add(Header.FAIL.getHeaderName(), "");
 		}
 
-		/*
 		//Copy all headers for Zipkin
 		final Set<Entry<String, String>> set = context.getHeaders().entrySet();
 		final Iterator<Entry<String, String>> iterator = set.iterator();
@@ -45,7 +47,7 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			final Entry<String, String> mentry = iterator.next();
 			headers.add(mentry.getKey(), mentry.getValue());
 		}
-		 */
+
 		return execution.execute(request, body);
 	}
 }

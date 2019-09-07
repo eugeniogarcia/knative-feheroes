@@ -3,17 +3,16 @@ package com.swisscom.heroes;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.swisscom.heroes.filter.HttpFiltro;
 import com.swisscom.heroes.filter.RequestContext;
 
-import brave.Tracer;
 
 @Configuration
 public class Configure {
@@ -27,9 +26,9 @@ public class Configure {
 	}
 
 	@Bean
-	public FilterRegistrationBean<HttpFiltro> trackingFilterRegistrar(final RequestContext oceRequestContext,final ObjectProvider<Tracer> tracer) {
+	public FilterRegistrationBean<HttpFiltro> trackingFilterRegistrar(final RequestContext oceRequestContext) {
 		final FilterRegistrationBean<HttpFiltro> registration = new FilterRegistrationBean<>();
-		registration.setFilter(new HttpFiltro(oceRequestContext,tracer.getIfAvailable()));
+		registration.setFilter(new HttpFiltro(oceRequestContext));
 		registration.setOrder(ORDER);
 		return registration;
 	}
@@ -38,7 +37,7 @@ public class Configure {
 	public RestTemplate service(RequestContext context) {
 		final RestTemplate template = new RestTemplate();
 
-		final List interceptors = template.getInterceptors();
+		final List<ClientHttpRequestInterceptor> interceptors = template.getInterceptors();
 		if (interceptors==null){
 			template.setInterceptors(Collections.singletonList(new RestInterceptor(context)));
 		}
