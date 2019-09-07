@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -17,6 +20,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
 @JsonFilter("MiContexto")
 public class RequestContext {
+	private static final Logger LOGGER= LoggerFactory.getLogger(RequestContext.class);
 
 	private final boolean initialised=false;
 	private String usuario="";
@@ -53,6 +57,8 @@ public class RequestContext {
 
 		while (headerNames.hasMoreElements()) {
 			final String headerName = headerNames.nextElement();
+			LOGGER.info("{} : {}",headerName,request.getHeader(headerName));
+
 			if(Header.isPropagated(headerName)) {
 				//Propate x-b3-parentspanid only when it has a value
 				if(headerName.compareTo(Header.x_b3_parentspanid.getHeaderName())!=0 ||
