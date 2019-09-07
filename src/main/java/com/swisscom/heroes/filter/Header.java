@@ -4,13 +4,13 @@ public enum Header {
 
 	USUARIO("x-usuario"),
 	FAIL("x-fail"),
-	x_request_id("x-request-id"),
-	x_b3_traceid("x-b3-traceid"),
-	x_b3_spanid("x-b3-spanid"),
-	x_b3_parentspanid("x-b3-parentspanid"),
-	x_b3_sampled("x-b3-sampled"),
-	x_b3_flags("x-b3-flags"),
-	x_ot_span_context("x-ot-span-context")
+	x_request_id("X-Request-Id"),
+	x_b3_traceid("X-B3-TraceId"),
+	x_b3_spanid("X-B3-SpanId"),
+	x_b3_parentspanid("X-B3-ParentSpanId"),
+	x_b3_sampled("X-B3-Sampled"),
+	x_b3_flags("X-B3-Flags"),
+	x_ot_span_context("X-Ot-Span-Context")
 	;
 
 	private final String headerName;
