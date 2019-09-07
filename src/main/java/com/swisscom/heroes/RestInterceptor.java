@@ -39,16 +39,6 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			headers.add(Header.FAIL.getHeaderName(), "");
 		}
 
-		/*
-		//Copy all headers for Zipkin
-		final Set<Entry<String, String>> set = context.getHeaders().entrySet();
-		final Iterator<Entry<String, String>> iterator = set.iterator();
-		while(iterator.hasNext()) {
-			final Entry<String, String> mentry = iterator.next();
-			headers.add(mentry.getKey(), mentry.getValue());
-		}
-		 */
-
 		//Print Headers
 		headers.entrySet().stream().forEach(x -> LOGGER.info("{} : {}",x.getKey(),x.getValue().get(0)));
 
