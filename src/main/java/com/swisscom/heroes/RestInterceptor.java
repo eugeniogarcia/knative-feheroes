@@ -1,9 +1,6 @@
 package com.swisscom.heroes;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +31,7 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 		LOGGER.info("Calling a backend");
 
 		if(!context.getUsuario().isEmpty()) {
-			LOGGER.info("Forwarding the header value {0}",context.getUsuario());
+			LOGGER.info("Forwarding the header value {}",context.getUsuario());
 			headers.add(Header.USUARIO.getHeaderName(), context.getUsuario());
 		}
 		if(context.isFail()) {
@@ -42,14 +39,18 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			headers.add(Header.FAIL.getHeaderName(), "");
 		}
 
+		/*
 		//Copy all headers for Zipkin
 		final Set<Entry<String, String>> set = context.getHeaders().entrySet();
 		final Iterator<Entry<String, String>> iterator = set.iterator();
 		while(iterator.hasNext()) {
 			final Entry<String, String> mentry = iterator.next();
 			headers.add(mentry.getKey(), mentry.getValue());
-			LOGGER.info("{0} : {1}",mentry.getKey(),mentry.getValue());
 		}
+		 */
+
+		//Print Headers
+		headers.entrySet().stream().forEach(x -> LOGGER.info("{} : {}",x.getKey(),x.getValue().get(0)));
 
 		return execution.execute(request, body);
 	}

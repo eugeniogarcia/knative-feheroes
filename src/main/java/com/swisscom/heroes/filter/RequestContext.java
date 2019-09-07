@@ -56,7 +56,7 @@ public class RequestContext {
 
 		while (headerNames.hasMoreElements()) {
 			final String headerName = headerNames.nextElement();
-			LOGGER.info("{0} : {1}",headerName,request.getHeader(headerName));
+			LOGGER.info("{} : {}",headerName,request.getHeader(headerName));
 			if(Header.isPropagated(headerName)) {
 				//Propate x-b3-parentspanid only when it has a value
 				if(headerName.compareTo(Header.x_b3_parentspanid.getHeaderName())!=0 ||
