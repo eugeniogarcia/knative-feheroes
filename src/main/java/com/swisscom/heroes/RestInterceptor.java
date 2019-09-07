@@ -28,6 +28,8 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			throws IOException {
 		final HttpHeaders headers = request.getHeaders();
 
+		LOGGER.info("Calling a backend");
+
 		if(!context.getUsuario().isEmpty()) {
 			LOGGER.info("Forwarding the header value {0}",context.getUsuario());
 			headers.add(Header.USUARIO.getHeaderName(), context.getUsuario());
@@ -46,6 +48,10 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			headers.add(mentry.getKey(), mentry.getValue());
 		}
 		 */
+
+		//Print Headers
+		headers.entrySet().stream().forEach(x -> LOGGER.info("{0} : {1}",x.getKey(),x.getValue().get(0)));
+
 		return execution.execute(request, body);
 	}
 }
