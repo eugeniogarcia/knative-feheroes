@@ -31,6 +31,8 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 			throws IOException {
 		final HttpHeaders headers = request.getHeaders();
 
+		LOGGER.info("Calling a backend");
+
 		if(!context.getUsuario().isEmpty()) {
 			LOGGER.info("Forwarding the header value {0}",context.getUsuario());
 			headers.add(Header.USUARIO.getHeaderName(), context.getUsuario());
@@ -46,6 +48,7 @@ public class RestInterceptor implements ClientHttpRequestInterceptor {
 		while(iterator.hasNext()) {
 			final Entry<String, String> mentry = iterator.next();
 			headers.add(mentry.getKey(), mentry.getValue());
+			LOGGER.info("{0} : {1}",mentry.getKey(),mentry.getValue());
 		}
 
 		return execution.execute(request, body);
