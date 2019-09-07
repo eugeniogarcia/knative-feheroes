@@ -21,7 +21,7 @@ public enum Header {
 
 	public static boolean isPropagated(String value) {
 		for (final Header c : Header.values()) {
-			if (c.headerName.compareTo(value)==0) {
+			if (c.headerName.toUpperCase().compareTo(value.toUpperCase())==0) {
 				return true;
 			}
 		}
