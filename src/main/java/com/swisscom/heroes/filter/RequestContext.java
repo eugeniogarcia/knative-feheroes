@@ -59,7 +59,7 @@ public class RequestContext {
 			LOGGER.info("{} : {}",headerName,request.getHeader(headerName));
 			if(Header.isPropagated(headerName)) {
 				//Propate x-b3-parentspanid only when it has a value
-				if(headerName.compareTo(Header.x_b3_parentspanid.getHeaderName())!=0 ||
+				if(headerName.toUpperCase().compareTo(Header.x_b3_parentspanid.getHeaderName().toUpperCase())!=0 ||
 						!request.getHeader(headerName).isEmpty()) {
 					headers.put(headerName , request.getHeader(headerName));
 				}
