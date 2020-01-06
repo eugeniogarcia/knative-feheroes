@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feheroes
+  namespace: heroes-ns
+  labels:
+    app: fe-heroes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-heroes
+  template:
+    metadata:
+      labels:
+        app: fe-heroes
+    spec:
+      containers:
+      - name: feheroes
+        image: pruebacontenedor.azurecr.io/knative-feheroes:latest
+        env:
+        - name: svc
+          value: "http://heroes-svc"
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8085
+        livenessProbe:
+          httpGet:
+            path: /heroes
+            port: 8085
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /heroes
+            port: 8085
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+      imagePullSecrets:
+      - name: milocalregistry
