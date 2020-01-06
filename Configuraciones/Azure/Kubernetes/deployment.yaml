@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: feheroes
-        image: egsmcontenedor.azurecr.io/fehello-jib:0.0.2-SNAPSHOT
+        image: pruebacontenedor.azurecr.io/knative-feheroes:latest
         env:
         - name: svc
           value: "http://heroes-svc"
@@ -35,7 +35,7 @@ spec:
           httpGet:
             path: /heroes
             port: 8085
-          initialDelaySeconds: 0
+          initialDelaySeconds: 5
           timeoutSeconds: 1
       imagePullSecrets:
       - name: milocalregistry
