@@ -10,7 +10,7 @@ export SOURCE_POD=$(kubectl get pod -l app=sleep -o jsonpath={.items..metadata.n
 
 # `global.outboundTrafficPolicy.mode`
 
-Istio has an installation option, global.outboundTrafficPolicy.mode, that configures the sidecar handling of external services, that is, those services that are not defined in Istio’s internal service registry. If this option is set to ALLOW_ANY, the Istio proxy lets calls to unknown services pass through. If the option is set to REGISTRY_ONLY, then the Istio proxy blocks any host without an HTTP service or service entry defined within the mesh. ALLOW_ANY is the default value.
+Istio has an installation option, global.outboundTrafficPolicy.mode, that configures the sidecar handling of external services, that is, those services that are not defined in Istioï¿½s internal service registry. If this option is set to ALLOW_ANY, the Istio proxy lets calls to unknown services pass through. If the option is set to REGISTRY_ONLY, then the Istio proxy blocks any host without an HTTP service or service entry defined within the mesh. ALLOW_ANY is the default value.
 
 ```sh
 kubectl get configmap istio -n istio-system -o yaml | grep -o "mode: ALLOW_ANY"

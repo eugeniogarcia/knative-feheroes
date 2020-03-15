@@ -1,21 +1,19 @@
-apiVersion: serving.knative.dev/v1alpha1
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: feheroes-svc
-  namespace: heroes-kn-ns
+  namespace: default
 spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          serviceAccountName: build-bot
-          container:
-            name: feheroes
-            image: egsmcontenedor.azurecr.io/fehello-jib:0.0.2-SNAPSHOT
-            env:
-            - name: svc
-              value: "http://heroes-svc.heroes-kn-ns"
-            imagePullPolicy: Always
-            ports:
-              - containerPort: 8085
-# http://feheroes-svc.heroes-kn-ns.example.com/heroes			  
+  template:
+    spec:
+      containers:
+      - image: pruebacontenedor.azurecr.io/knative-heroes:latest
+        name: heroes
+        env:
+        - name: svc
+          value: "http://heroes-svc.default"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+      imagePullSecrets:
+      - name: milocalregistry

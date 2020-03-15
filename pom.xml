@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.knative</groupId>
-	<artifactId>heroes_passthrough</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<artifactId>knative-feheroes</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>heroes_passthrough</name>
@@ -45,8 +45,8 @@
       		<groupId>org.springframework.boot</groupId>
       		<artifactId>spring-boot-starter-actuator</artifactId>
     	</dependency>
-
-		<dependency> 
+    	
+    	<dependency> 
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
@@ -64,10 +64,10 @@
 			<plugin>
 	             <groupId>com.google.cloud.tools</groupId>
 	             <artifactId>jib-maven-plugin</artifactId>
-	             <version>1.5.1</version>
+	             <version>1.7.0</version>
 	             <configuration>
 	             	  <from>
-						<image>openjdk:8u212-jre</image>
+						<image>openjdk:8u212-jre-alpine</image>
 						<auth>
 					    	<username>egsmartin</username>
 					    	<password>Vera1511</password>
@@ -89,15 +89,15 @@
 					    	<password>Vera1511</password>
 					    </auth>
 					    -->
-					    <image>egsmcontenedor.azurecr.io/fehello-jib:${project.version}</image>
+					    <image>pruebacontenedor.azurecr.io/${project.artifactId}:${project.version}</image>
 						<auth>
-					    	<username>egsmContenedor</username>
-					    	<password>LNTuvGUKsCf9w5lMgJwYBjiMWJL/19Ea</password>
+					    	<username>pruebacontenedor</username>
+					    	<password>Pr0bDGtfdIKbWj+pGbGEsFpc8D/3enAH</password>
 					    </auth>
 					  </to>
 					  <container>
 						<ports>
-							<port>8082</port>
+							<port>8085</port>
 						</ports>
 						<!-- 
 						<jvmFlags>

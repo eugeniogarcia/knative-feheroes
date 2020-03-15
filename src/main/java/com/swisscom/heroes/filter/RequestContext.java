@@ -17,8 +17,6 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
-import brave.SpanCustomizer;
-
 
 @JsonFilter("MiContexto")
 public class RequestContext {
@@ -67,14 +65,6 @@ public class RequestContext {
 						!request.getHeader(headerName).isEmpty()) {
 					headers.put(headerName , request.getHeader(headerName));
 				}
-			}
-		}
-	}
-
-	public void updateSpan(SpanCustomizer span) {
-		for (final Map.Entry<String, Object> entry : toMap(this).entrySet()) {
-			if (entry.getValue() != null) {
-				span.tag(entry.getKey(), entry.getValue().toString());
 			}
 		}
 	}
